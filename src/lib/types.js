@@ -1,0 +1,2 @@
+//Global
+export const GLOBALS_APP_CONFIG = "GLOBALS_APP_CONFIG";
