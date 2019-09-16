@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import 'jquery/dist/jquery.slim.min';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import './App.scss';
@@ -10,7 +10,7 @@ class HomeComponent extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-12 text-secondary text-center">
+        <div className="col-12 text-light text-center">
           <p>Docker-React-Redux boilerplate V1</p>
         </div>
       </div>
@@ -22,7 +22,7 @@ class AboutComponent extends Component {
   render() {
     return (
       <div className="row justify-content-center">
-        <div className="col-10 col-md-4 text-secondary">
+        <div className="col-10 col-md-4 text-light">
           <ul>
             <li>React-Create-App boilerplate</li>
             <li>Ready to deploy Docker Nginx container to serve static build</li>
@@ -40,9 +40,22 @@ class ContactComponent extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-12 text-secondary text-center">
-          <p>Integration by <a href="http://www.omargonzalez.me/">Omar Gonzalez</a> &copy; 2019 - Code released under the MIT license.</p>
+        <div className="col-12 text-light text-center">
+          <p>Integration by <a href="http://www.omargonzalez.me/">Omar Gonzalez</a> &copy; 2019 - Code released under
+            the MIT license.</p>
           <p>Mail me at <a href='mailto:gonzalezrocha.omar@gmail.com'>gonzalezrocha.omar@gmail.com</a></p>
+        </div>
+      </div>
+    )
+  }
+}
+
+class NotFoundComponent extends Component {
+  render() {
+    return (
+      <div className="row">
+        <div className="col-12 text-center">
+          <h2 className='text-light'>404 Not Found</h2>
         </div>
       </div>
     )
@@ -64,15 +77,18 @@ class App extends Component {
           <div className="row justify-content-center mt-5">
             <div className="col-12 text-center">
               <img src={logo} className="App-logo" alt="logo"/>
-              <h2 className="text-white">{appName}</h2>
+              <h2 style={{color: '#61DAFB'}}>{appName}</h2>
             </div>
             <div className="col-12 text-center text-secondary">
               <Link to="/">Home</Link> | <Link to="/about">About</Link> | <Link to="/contact">Contact</Link>
             </div>
           </div>
-          <Route exact path="/" component={HomeComponent}/>
-          <Route path="/about" component={AboutComponent}/>
-          <Route path="/contact" component={ContactComponent}/>
+          <Switch>
+            <Route exact path="/" component={HomeComponent}/>
+            <Route path="/about" component={AboutComponent}/>
+            <Route path="/contact" component={ContactComponent}/>
+            <Route component={NotFoundComponent}/>
+          </Switch>
         </Router>
       </div>
     );
